@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificado</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #03143b;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .certificado {
+      background: #ceffe4;
+      color: #000;
+      padding: 40px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .assinatura {
+      margin-top: 40px;
+    }
+
+    .assinatura img {
+      width: 150px;
+    }
+
+    .botoes {
+      margin-top: 20px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .twitter { background: #1DA1F2; color: white; }
+    .mastodon { background: #000064; color: white; }
+    .bluesky { background: #0285FF; color: white; }
+
+    .topo {
+  position: relative;
+  height: 220px;
+  margin-bottom: 20px;
+        }
+
+        .logo {
+        position: absolute;
+        top: 0;
+        width: 120px;
+        }
+
+        .esquerda {
+        left: 0;
+        }
+
+        .direita {
+        right: 0;
+        }
+  </style>
+</head>
+
+<body>
+
+<h1>Gerando certificado...</h1>
+
+<div id="certificado" class="certificado" style="display:none;"></div>
+
+<div class="botoes" id="share" style="display:none;">
+  <button class="twitter" onclick="shareTwitter()">Twitter</button>
+  <button class="mastodon" onclick="shareMastodon()">Mastodon</button>
+  <button class="bluesky" onclick="shareBluesky()">Bluesky</button>
+</div>
+
+<script>
+  function getParametro(nome) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(nome);
+  }
+
+  function classificarTempo(segundos) {
+    if (segundos < 60) return "Distinção Máxima!!!";
+    if (segundos < 180) return "Louvor!";
+    if (segundos < 300) return "Aprovado!";
+    if (segundos < 600) return "Satisfatório!";
+    return "Sobreviveu";
+  }
+
+  function gerarCertificado() {
+    const tempo = parseInt(getParametro("tempo")) || 999;
+    const nome = prompt("Digite seu nome:");
+
+    if (!nome) {
+      alert("Nome é obrigatório!");
+      return;
+    }
+
+    const classificacao = classificarTempo(tempo);
+
+    const texto = `
+    <div class="topo">
+        <img src="assets/logo1.png" class="logo esquerda">
+        <img src="assets/logo2.png" class="logo direita">
+    </div>
+
+
+    <h2>Certificado Oficial</h2>
+
+    <p>
+        Instituto Federal Suvaco do Guaxinim em Parceria(IFSG) com a Extreme GoHorse certificam que
+        <strong>${nome}</strong>
+        completou a maratona de suporte ao usuário em
+        <strong>${tempo} segundos</strong>.
+    </p>
+
+    <p>
+        Sendo considerado apto para trabalho em suporte com:
+        <strong>${classificacao}</strong>
+    </p>
+
+    <div class="assinatura">
+        <p>Assinatura:</p>
+        <img src="assets/assinatura.png" alt="assinatura">
+    </div>
+    `;
+
+    document.getElementById("certificado").innerHTML = texto;
+    document.getElementById("certificado").style.display = "block";
+    document.getElementById("share").style.display = "block";
+
+    window.certificadoTexto = `Eu completei a maratona de suporte em ${tempo}s e consegui ${classificacao}! #certificadoSuporteGoHorse `;
+  }
+
+  function shareTwitter() {
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(window.certificadoTexto)}`;
+    window.open(url, "_blank");
+  }
+
+  function shareMastodon() {
+    const url = `https://mastodon.social/share?text=${encodeURIComponent(window.certificadoTexto)}`;
+    window.open(url, "_blank");
+  }
+
+  function shareBluesky() {
+    const url = `https://bsky.app/intent/compose?text=${encodeURIComponent(window.certificadoTexto)}`;
+    window.open(url, "_blank");
+  }
+
+  gerarCertificado();
+</script>
+
+</body>
+</html>
