@@ -14,21 +14,89 @@
       padding: 20px;
     }
 
-    .certificado {
-      background: #ceffe4;
-      color: #000;
-      padding: 40px;
-      border-radius: 10px;
-      max-width: 800px;
-      margin: 20px auto;
-    }
+.certificado {
+  position: relative;
+  background: #fdfcf7;
+  color: #1a1a1a;
+  padding: 50px 40px;
+  max-width: 900px;
+  margin: 20px auto;
+
+
+  border: 12px solid #1e3a8a; 
+  outline: 6px solid #d4af37; 
+
+  border-radius: 8px;
+
+
+  box-shadow: 0 0 25px rgba(0,0,0,0.3);
+}
+
+/* Linha interna decorativa */
+.certificado::before {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border: 2px solid #d4af37;
+  pointer-events: none;
+}
+
+
+.certificado h2 {
+  font-family: "Georgia", serif;
+  font-size: 32px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+
+.certificado p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+
+.certificado strong {
+  font-size: 20px;
+  color: #1e3a8a;
+}
+
+
+.assinatura {
+  margin-top: 40px;
+}
+
+.assinatura img {
+  width: 160px;
+}
+
+
+.selo {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffd700, #b8960b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  text-align: center;
+  font-weight: bold;
+  color: #000;
+  transform: rotate(-15deg);
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
 
     h1 {
       margin-bottom: 20px;
     }
 
     .assinatura {
-      margin-top: 40px;
+      margin-top: 30px;
     }
 
     .assinatura img {
@@ -74,7 +142,7 @@
         .logo {
         position: absolute;
         top: 0;
-        width: 120px;
+        width: 160px;
         }
 
         .esquerda {
@@ -84,6 +152,32 @@
         .direita {
         right: 0;
         }
+
+
+  @media print {
+  body {
+    background: white !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .certificado, .certificado * {
+    visibility: visible;
+  }
+
+  .certificado {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+
+    background: #ceffe4 !important; /* força o fundo */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
   </style>
 </head>
 
@@ -108,6 +202,7 @@
   <button class="bolhaus" onclick="shareMastodonInstance('https://bolha.us')">Bolha.us</button>
   <button class="burnthistown" onclick="shareMastodonInstance('https://burnthistown.social')">burnthistown</button>
   <button class="bertha" onclick="shareMastodonInstance('https://bertha.social')">bertha.social</button>
+  <button class="imprimir" onclick="imprimirCertificado()">Imprimir / Salvar PDF</button>
 </div>
 
 <script>
@@ -141,11 +236,13 @@
     const texto = `
     <div class="topo">
         <img src="assets/logo1.png" class="logo esquerda">
+         <h2>Certificado Oficial</h2>
+         <h3>Suporte CompeTItivo</h3>
         <img src="assets/logo2.png" class="logo direita">
     </div>
 
 
-    <h2>Certificado Oficial</h2>
+   
 
     <p>
         Instituto Federal Suvaco do Guaxinim(IFSG) em Parceria com a Extreme GoHorse certificam que
@@ -184,6 +281,9 @@
   function shareBluesky() {
     const url = `https://bsky.app/intent/compose?text=${encodeURIComponent(window.certificadoTexto)}`;
     window.open(url, "_blank");
+  }
+  function imprimirCertificado() {
+  window.print();
   }
 
   gerarCertificado();
