@@ -212,13 +212,14 @@
   }
 
   function classificarTempo(segundos) {
-    if (segundos < 124) return "Distinção Máxima!!!";
-    if (segundos < 166) return "Louvor!";
+    if (segundos < 120) return "Distinção Extrema!!!";
+    if (segundos < 124) return "Distinção!!!";
+    if (segundos < 132) return "Louvor!";
+    if (segundos < 175) return "Satisfação!";
     if (segundos < 200) return "Aprovação!";
-    if (segundos < 280) return "Satisfação!";
-    if (segundos < 380) return "aceitabilidade!";
-    if (segundos < 620) return "passabilidade!";
-    if (segundos < 800) return "receio!";
+    if (segundos < 230) return "aceitabilidade!";
+    if (segundos < 300) return "passabilidade!";
+    if (segundos < 500) return "receio!";
     return "medo";
   }
 
