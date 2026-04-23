@@ -47,9 +47,23 @@
       cursor: pointer;
     }
 
-    .twitter { background: #1DA1F2; color: white; }
-    .mastodon { background: #000064; color: white; }
-    .bluesky { background: #0285FF; color: white; }
+  .twitter { background: #000000; color: white; }
+  .mastodon { background: #6364FF; color: white; } 
+  .bluesky { background: #0085FF; color: white; }
+
+  /* Instâncias */
+  .bantu { background: #FF6B00; color: white; }        
+  .colorides { background: #FF4FC3; color: white; }   
+  .capivarinha { background: #8B5A2B; color: white; } 
+  .organica { background: #2ECC71; color: white; }    
+  .bolhaone { background: #00C2FF; color: white; }    
+  .ursal { background: #A52A2A; color: white; }       
+  .masto { background: #7A5CFF; color: white; }       
+  .arram { background: #FF0033; color: white; } 
+  .bolhaus { background: #0099CC; color: white; }     
+  .burnthistown { background: #FF4500; color: white; } 
+  .bertha { background: #6A0DAD; color: white; }
+
 
     .topo {
   position: relative;
@@ -78,11 +92,22 @@
 <h1>Gerando certificado...</h1>
 
 <div id="certificado" class="certificado" style="display:none;"></div>
-
+<p>Compartilhe seu resultado e desafie pessoas!</p>
 <div class="botoes" id="share" style="display:none;">
-  <button class="twitter" onclick="shareTwitter()">Twitter</button>
-  <button class="mastodon" onclick="shareMastodon()">Mastodon</button>
+  <button class="mastodon" onclick="shareMastodonInstance('https://mastodon.com.br')">Mastodon.br</button>
   <button class="bluesky" onclick="shareBluesky()">Bluesky</button>
+  <button class="twitter" onclick="shareTwitter()">Twitter</button>
+  <button class="bantu" onclick="shareMastodonInstance('https://bantu.social')">Bantu.social</button>
+  <button class="colorides" onclick="shareMastodonInstance('https://colorid.es')">Colorid.es</button>
+  <button class="capivarinha" onclick="shareMastodonInstance('https://capivarinha.club')">Capivarinha.club</button>
+  <button class="organica" onclick="shareMastodonInstance('https://organica.social')">Organica.social</button>
+  <button class="bolhaone" onclick="shareMastodonInstance('https://bolha.one')">Bolha.one</button>
+  <button class="ursal" onclick="shareMastodonInstance('https://ursal.zone')">Ursal.zone</button>
+  <button class="masto" onclick="shareMastodonInstance('https://masto.donte.com.br')">masto.donte.com.br</button>
+  <button class="arram" onclick="shareMastodonInstance('https://arram.senta-la.cloud')">arram.senta-la.cloud</button>
+  <button class="bolhaus" onclick="shareMastodonInstance('https://bolha.us')">Bolha.us</button>
+  <button class="burnthistown" onclick="shareMastodonInstance('https://burnthistown.social')">burnthistown</button>
+  <button class="bertha" onclick="shareMastodonInstance('https://bertha.social')">bertha.social</button>
 </div>
 
 <script>
@@ -152,11 +177,10 @@
     window.open(url, "_blank");
   }
 
-  function shareMastodon() {
-    const url = `https://mastodon.com.br/share?text=${encodeURIComponent(window.certificadoTexto)}`;
+  function shareMastodonInstance(baseUrl) {
+    const url = `${baseUrl}/share?text=${encodeURIComponent(window.certificadoTexto)}`;
     window.open(url, "_blank");
   }
-
   function shareBluesky() {
     const url = `https://bsky.app/intent/compose?text=${encodeURIComponent(window.certificadoTexto)}`;
     window.open(url, "_blank");
