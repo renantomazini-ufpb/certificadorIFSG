@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Certificado</title>
-
+  <meta property="og:title" content="Meu Certificado de Suporte GoHorse na IFSG">
+  <meta property="og:description" content="Completei a maratona de suporte! Veja meu resultado.">
+  <meta property="og:image" content="URL_DA_IMAGEM_DO_CERTIFICADO">
+  <meta property="og:url" content="URL_DA_PAGINA">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -118,8 +121,8 @@
   .twitter { background: #000000; color: white; }
   .mastodon { background: #6364FF; color: white; } 
   .bluesky { background: #0085FF; color: white; }
+  .linkedin { background: #0A66C2; color: white; }
 
-  /* Instâncias */
   .bantu { background: #FF6B00; color: white; }        
   .colorides { background: #FF4FC3; color: white; }   
   .capivarinha { background: #8B5A2B; color: white; } 
@@ -202,6 +205,7 @@
   <button class="bolhaus" onclick="shareMastodonInstance('https://bolha.us')">Bolha.us</button>
   <button class="burnthistown" onclick="shareMastodonInstance('https://burnthistown.social')">burnthistown</button>
   <button class="bertha" onclick="shareMastodonInstance('https://bertha.social')">bertha.social</button>
+  <button class="linkedin" onclick="shareLinkedIn()">LinkedIn (really?)</button>
   <button class="imprimir" onclick="imprimirCertificado()">Imprimir / Salvar PDF</button>
 </div>
 
@@ -282,6 +286,10 @@
   function shareBluesky() {
     const url = `https://bsky.app/intent/compose?text=${encodeURIComponent(window.certificadoTexto)}`;
     window.open(url, "_blank");
+  }
+  function shareLinkedIn() {
+  const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}&summary=${encodeURIComponent(window.certificadoTexto)}`;
+  window.open(url, "_blank");
   }
   function imprimirCertificado() {
   window.print();
